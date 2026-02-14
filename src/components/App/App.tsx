@@ -1,3 +1,4 @@
+import './App.module.css'
 import css from './App.module.css'
 import toast, { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
@@ -46,8 +47,13 @@ export default function App() {
         toast.error('No movies found for your request.', {
           style: { fontFamily: 'Montserrat' },
         });
+        setMovies([]);
+        setPage(1);
+        setTotalPages(1);
+        return;
       } else {
         setMovies(moviesData.results);
+        setTotalPages(moviesData.total_pages)
       }
 
       if (moviesData.total_pages > 1) {
