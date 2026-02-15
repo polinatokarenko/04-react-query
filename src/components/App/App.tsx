@@ -1,6 +1,6 @@
 import css from './App.module.css';
 import toast, { Toaster } from 'react-hot-toast';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 
@@ -42,11 +42,13 @@ export default function App() {
   const movies = data?.results ?? [];
   const totalPages = data?.total_pages ?? 1;
 
+  useEffect(() => {
   if (isSuccess && movies.length === 0) {
     toast.error('No movies found for your request.', {
       style: { fontFamily: 'Montserrat' },
     });
-  }
+    }
+  }, [isSuccess, movies.length]);
 
   return (
     <>
